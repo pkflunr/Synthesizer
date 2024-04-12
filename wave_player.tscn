@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://wave_player.gd" id="1_0mf2v"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_7awwu"]
-mix_rate = 22050.0
+mix_rate = 11025.0
+buffer_length = 1.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = SubResource("AudioStreamGenerator_7awwu")
