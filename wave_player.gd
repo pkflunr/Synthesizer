@@ -1,24 +1,7 @@
 extends AudioStreamPlayer
 
 var sample_rate = stream.mix_rate
-var pitch = 220.0
 var playback 
-func _ready():
-	play()
-	
-	generate_wave(pitch, sawtooth)
-	
-	await get_tree().create_timer(2).timeout
-	
-	generate_wave(pitch, sinewave)
-	
-	await get_tree().create_timer(2).timeout
-	
-	generate_wave(pitch, square)
-	
-	await get_tree().create_timer(2).timeout
-	
-	generate_wave(pitch, triangle)
 
 func generate_wave(pitch, wave_function):
 	playback = get_stream_playback()
