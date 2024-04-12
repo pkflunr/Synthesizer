@@ -3,14 +3,23 @@ extends AudioStreamPlayer
 var sample_rate = stream.mix_rate
 var playback 
 
-func generate_wave(pitch, wave_function):
+func generate_wave(notes_dict:Dictionary, wave_function):
+	print(notes_dict)
 	playback = get_stream_playback()
-	var phase = 0.0
-	var increment = pitch / sample_rate
+	var phases = {}
+	var increments = {}
+	for key in notes_dict.keys():
+		phases[key] = 0.0
+		increments[key] = key / sample_rate
+
 	var  frames_available = playback.get_frames_available()
 	for i in range(frames_available):
-		playback.push_frame(Vector2.ONE * wave_function.call(phase))
-		phase += increment
+		var frame = Vector2.ZERO
+		for key in notes_dict.keys():
+			frame += Vector2.ONE * wave_function.call(phases[key]) * notes_dict[key] / 127
+		playback.push_frame(frame)
+		for key in notes_dict.keys():
+			phases[key] += increments[key]
 
 func sawtooth(phase):
 	return 2 * (phase - floor(.5 + phase))
