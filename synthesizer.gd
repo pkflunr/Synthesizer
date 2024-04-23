@@ -26,6 +26,7 @@ func _handle_midi_event(midi_event: InputEventMIDI):
 		else:
 			wave_player.play()
 			wave_player.generate_wave(notes_dict, wave_player.square)
+
 # using equal temperament
 func midi_to_freq(midi_pitch):
 	return 440.0 * (2.0 ** ((midi_pitch - 69.0) / 12.0))
