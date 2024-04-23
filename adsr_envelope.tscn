@@ -78,3 +78,8 @@ layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 3
 max_value = 127.0
+
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/AttackSlider" to="." method="_on_any_setting_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer2/DecaySlider" to="." method="_on_any_setting_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer3/SustainSlider" to="." method="_on_any_setting_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer4/ReleaseSlider" to="." method="_on_any_setting_changed"]
