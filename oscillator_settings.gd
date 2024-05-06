@@ -5,6 +5,7 @@ extends PanelContainer
 @onready var fine_h_slider = %FineHSlider
 @onready var level_v_slider = %LevelVSlider
 
+
 signal settings_changed(wave_type:Globals.OscType,transpose,fine_tune,level)
 
 func _on_any_setting_changed(_value):

@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://rc8xhwgtbogh"]
+
+[ext_resource type="Script" path="res://filter_settings.gd" id="1_8eks0"]
+
+[node name="FilterSettings" type="PanelContainer"]
+offset_right = 161.0
+offset_bottom = 101.0
+script = ExtResource("1_8eks0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="OnOffButton" type="CheckButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Off/On"
+
+[node name="HiLoPassButton" type="CheckButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Low/High Pass"
+
+[node name="EnvButton" type="CheckButton" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Use Env"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Hz:"
+
+[node name="HzTextEdit" type="SpinBox" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 20.0
+max_value = 20000.0
+value = 20.0
+exp_edit = true
+rounded = true
+
+[node name="HzSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 20.0
+max_value = 20000.0
+value = 20.0
+exp_edit = true
+rounded = true
+
+[connection signal="toggled" from="VBoxContainer/OnOffButton" to="." method="_on_on_off_button_toggled"]
+[connection signal="toggled" from="VBoxContainer/HiLoPassButton" to="." method="_on_hi_lo_pass_button_toggled"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/HzTextEdit" to="." method="_on_hz_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/HzSlider" to="." method="_on_hz_changed"]

@@ -4,6 +4,11 @@ extends Node
 
 var notes_dict = {}
 
+var wave_1 = 0
+var wave_2 = 0
+var level_1 = 0
+var level_2 = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	OS.open_midi_inputs()
@@ -17,7 +22,7 @@ func _handle_midi_event(midi_event: InputEventMIDI):
 	if midi_event.message == MIDI_MESSAGE_NOTE_ON:
 		notes_dict[midi_to_freq(midi_event.pitch)] = midi_event.velocity
 		wave_player.play()
-		wave_player.generate_wave(notes_dict, wave_player.square)
+		wave_player.generate_wave(notes_dict, wave_1, level_1, wave_2, level_2)
 	
 	if midi_event.message == MIDI_MESSAGE_NOTE_OFF:
 		notes_dict.erase(midi_to_freq(midi_event.pitch))
@@ -25,7 +30,7 @@ func _handle_midi_event(midi_event: InputEventMIDI):
 			wave_player.stop()
 		else:
 			wave_player.play()
-			wave_player.generate_wave(notes_dict, wave_player.square)
+			wave_player.generate_wave(notes_dict, wave_1, level_1, wave_2, level_2)
 
 # using equal temperament
 func midi_to_freq(midi_pitch):

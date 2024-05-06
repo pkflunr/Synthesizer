@@ -3,8 +3,9 @@ extends AudioStreamPlayer
 var sample_rate = stream.mix_rate
 var playback 
 
-func generate_wave(notes_dict:Dictionary, wave_function):
-	print(notes_dict)
+var functions = [sinewave,square,triangle,sawtooth]
+
+func generate_wave(notes_dict:Dictionary, wave_function_1, level_1, wave_function_2, level_2):
 	playback = get_stream_playback()
 	var phases = {}
 	var increments = {}
@@ -16,7 +17,8 @@ func generate_wave(notes_dict:Dictionary, wave_function):
 	for i in range(frames_available):
 		var frame = Vector2.ZERO
 		for key in notes_dict.keys():
-			frame += Vector2.ONE * wave_function.call(phases[key]) * notes_dict[key] / 127
+			frame += Vector2.ONE * functions[wave_function_1].call(phases[key]) * level_1 / 127 * notes_dict[key] / 127
+			frame += Vector2.ONE * functions[wave_function_2].call(phases[key]) * level_2 / 127 * notes_dict[key] / 127
 		playback.push_frame(frame)
 		for key in notes_dict.keys():
 			phases[key] += increments[key]

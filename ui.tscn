@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://nmbge2h3xn0w"]
+
+[ext_resource type="Script" path="res://ui.gd" id="1_pfj5x"]
+[ext_resource type="PackedScene" uid="uid://db5n7ddifpp1f" path="res://oscillator_settings.tscn" id="1_wnrkn"]
+[ext_resource type="PackedScene" uid="uid://rc8xhwgtbogh" path="res://filter_settings.tscn" id="2_el8t6"]
+[ext_resource type="PackedScene" uid="uid://clt3annqddrca" path="res://adsr_envelope.tscn" id="2_gtwyy"]
+[ext_resource type="PackedScene" uid="uid://b2gc0g8hvvn5w" path="res://synthesizer.tscn" id="5_mdbwe"]
+
+[node name="UI" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pfj5x")
+
+[node name="Synthesizer" parent="." instance=ExtResource("5_mdbwe")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Osc1"
+
+[node name="OscillatorSettings" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_wnrkn")]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Osc2"
+
+[node name="OscillatorSettings2" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_wnrkn")]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Filter
+"
+
+[node name="FilterSettings" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_el8t6")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Amp Env"
+
+[node name="AmpEnvelope" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("2_gtwyy")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Filter Env"
+
+[node name="FilterEnvelope" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("2_gtwyy")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="settings_changed" from="HBoxContainer/VBoxContainer/OscillatorSettings" to="." method="_on_oscillator_settings_settings_changed"]
+[connection signal="settings_changed" from="HBoxContainer/VBoxContainer/OscillatorSettings2" to="." method="_on_oscillator_settings_2_settings_changed"]
